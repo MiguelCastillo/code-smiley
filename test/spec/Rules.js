@@ -2,13 +2,23 @@ import Rules from "../../src/Rules";
 import { expect } from "chai";
 
 describe("Test suite", function () {
-  var pandaBear;
-  beforeEach(function () {
-    pandaBear = new Rules();
-    sinon.stub(pandaBear, "eats").returns("Bamboo and more");
-  });
+  describe("When creating a Rules", function() {
+    var rules;
+    beforeEach(function () {
+      rules = new Rules();
+    });
 
-  it("pandaBear.eats returns `Bamboo and more`", function() {
-    expect(pandaBear.eats()).to.equal("Bamboo and more");
+    describe("and parsing a simple input", function() {
+      var result, source;
+
+      beforeEach(function() {
+        source = "var x = 1;";
+        result = rules.parse(source);
+      })
+
+      it("then an AST is created with type Program", function() {
+        expect(result.type).to.equal("Program");
+      });
+    });
   });
 });

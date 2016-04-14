@@ -1,8 +1,7 @@
 import { parse } from "acorn";
 
 class Rules {
-  eats() {
-    return "Bamboo";
+  constructor() {
   }
 
   parse(source) {

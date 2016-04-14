@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("lint", ["eslint:all"]);
   grunt.registerTask("test", ["connect:quick", "mocha:test"]);
+  grunt.registerTask("build", ["build-site", "build-test"]);
   grunt.registerTask("build-test", ["eslint:all", "browserify:test"]);
   grunt.registerTask("build-site", ["eslint:all", "browserify:site", "copy:site"]);
   grunt.registerTask("serve-test", ["build-test", "concurrent:test"]);

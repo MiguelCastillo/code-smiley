@@ -10,6 +10,7 @@ module.exports = {
       banner: banner,
       transform: [["babelify", { presets: ["react", "es2015"] }]],
       browserifyOptions: {
+        debug: true
       }
     }
   },
@@ -20,6 +21,7 @@ module.exports = {
       banner: banner,
       transform: [["babelify", { presets: ["react", "es2015"] }]],
       browserifyOptions: {
+        debug: true
       }
     }
   }

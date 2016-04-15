@@ -87,7 +87,7 @@ describe("Rules test suite", function () {
         });
 
         it("then an exception is thrown", function() {
-          expect(act).to.throw(Error, "VariableDeclaration is already registered");
+          expect(act).to.throw(Error, "variable declaration is already registered");
         });
       });
 

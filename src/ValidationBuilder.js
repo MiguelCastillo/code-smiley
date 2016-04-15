@@ -1,3 +1,5 @@
+import toTokenName from "./utils/toTokenName";
+
 class ValidationBuilder {
   constructor() {
     this.handlers = {};
@@ -5,11 +7,11 @@ class ValidationBuilder {
 
   withRules(rules, handler) {
     rules.reduce((container, tokenName) => {
-      if (container[tokenName]) {
+      if (container[toTokenName(tokenName)]) {
         throw new Error(tokenName + " is already registered");
       }
 
-      container[tokenName] = handler;
+      container[toTokenName(tokenName)] = handler;
       return container;
     }, this.handlers);
 

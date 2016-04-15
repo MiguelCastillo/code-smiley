@@ -3,7 +3,7 @@ function toTokenName(input) {
     .replace(/\s+/, " ")
     .split(" ")
     .map(capitalize)
-    .join('');
+    .join("");
 }
 
 function capitalize(input) {

@@ -21,13 +21,13 @@ class Rules {
   }
 
   include(tokenNames) {
-    tokenNames = toArray(tokenNames).map(toTokenName);
+    tokenNames = toArray(tokenNames);
     this._whitelist = this._whitelist.concat(tokenNames);
     return this;
   }
 
   exclude(tokenNames) {
-    tokenNames = toArray(tokenNames).map(toTokenName);
+    tokenNames = toArray(tokenNames);
     this._blacklist = this._blacklist.concat(tokenNames);
     return this;
   }
@@ -65,6 +65,7 @@ function traverse(parent, tree) {
   }
 
   var results = [];
+
   var visitor = function(item) {
     return function(node) {
       results.push({node, item});

@@ -21,13 +21,18 @@ describe("Rules test suite", function () {
     });
 
     describe("and adding inclusion rules", function() {
-      var includes, excludes, validation;
-      var act = () => validation = rules.include(includes).exclude(excludes).parse(source).validate();
+      var includes, excludes, tree, validation;
+      var act = () => validation = rules.include(includes).exclude(excludes).structure(tree).parse(source).validate();
+
+      beforeEach(function() {
+        includes = [];
+        excludes = [];
+        tree = {};
+      });
 
       describe("and inclusion rules are met", function() {
         beforeEach(function() {
           source = "var x = 32;";
-          excludes = [];
           includes = ["variable declaration"];
           act();
         });
@@ -44,7 +49,6 @@ describe("Rules test suite", function () {
       describe("and exclusion rules are met", function() {
         beforeEach(function() {
           source = "var x = 32;";
-          includes = [];
           excludes = ["variable declaration"];
           act();
         });
@@ -87,6 +91,47 @@ describe("Rules test suite", function () {
         });
       });
 
+      describe("and matching the shape of a valid structure", function() {
+        beforeEach(function() {
+          source = "for(var y = 12; y < 0; y++) { if (y === 12) { while(y) {  } } }";
+          tree = {
+            "for statement": {
+              "if statement": {
+                "while statement": {
+                }
+              }
+            }
+          };
+
+          act();
+        });
+
+        it("then shape is matched", function() {
+          expect(validation.structure).to.equal(true);
+        });
+      });
+
+      describe("and matching the shape of a not valid structure", function() {
+        beforeEach(function() {
+          source = "for(var y = 12; y < 0; y++) { if (y === 12) { while(y) {  } } }";
+          tree = {
+            "for statement": {
+              "if statement": {
+                "while statement": {
+                  "variable declaration": {
+                  }
+                }
+              }
+            }
+          };
+
+          act();
+        });
+
+        it("then shape is matched", function() {
+          expect(validation.structure).to.not.equal(true);
+        });
+      });
     });
   });
 });

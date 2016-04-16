@@ -17,8 +17,6 @@ class ValidationItem extends React.Component {
       className.push("is-invalid");
     }
 
-    console.log(node);
-
     return (
       <li className={className} >
         {rule}: [{validation}] [<ValidationLocation location={node.loc.start}/>] {result}

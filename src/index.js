@@ -34,7 +34,7 @@ while(x === 10) {
 `;
 
 DOMReady(() => {
-  var tokenDefinitionsArray = Object.keys(tokenDefinitions).map((i) => tokenDefinitions[i])
+  var tokenDefinitionsArray = Object.keys(tokenDefinitions).map((i) => tokenDefinitions[i]);
 
   ReactDOM.render(
     <App validation={validation} tokenDefinitions={tokenDefinitionsArray} sourceCode={sourceCode}/>,

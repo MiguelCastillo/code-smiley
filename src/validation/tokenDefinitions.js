@@ -3,7 +3,7 @@ import toTokenFriendlyName from "../utils/toTokenFriendlyName";
 
 var TokenDefinitions = Object.keys(base).reduce((container, code) => {
   var name = toTokenFriendlyName(code);
-  container[name] = { name, code };
+  container[code] = { name, code };
   return container;
 }, {});
 

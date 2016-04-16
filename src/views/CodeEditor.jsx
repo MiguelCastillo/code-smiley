@@ -27,7 +27,7 @@ class CodeEditor extends React.Component {
   }
 
   render() {
-    return <textarea ref="editor" className="editor"></textarea>;
+    return <textarea ref="editor" className="editor" value={this.props.value} onChange={() => {}}></textarea>;
   }
 }
 

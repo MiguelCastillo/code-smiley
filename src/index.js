@@ -10,13 +10,34 @@ var validation = new Validation();
 
 validation
   .include(["variable declaration", "if statement"])
-  .exclude(["while statement"]);
+  .exclude(["while statement"])
+  .structure({
+    "for statement": {
+      "variable declaration": {}
+    }
+  });
+
+// Some random default sample code
+var sourceCode = `var x = 10;
+
+for(var i = 0; i < 81; i++) {
+  var s = 2;
+
+  if (i) {
+    console.log(i);
+  }
+}
+
+while(x === 10) {
+  console.log('invalid code');
+}
+`;
 
 DOMReady(() => {
   var tokenDefinitionsArray = Object.keys(tokenDefinitions).map((i) => tokenDefinitions[i])
 
   ReactDOM.render(
-    <App validation={validation} tokenDefinitions={tokenDefinitionsArray}/>,
+    <App validation={validation} tokenDefinitions={tokenDefinitionsArray} sourceCode={sourceCode}/>,
     document.getElementById("app")
   );
 });

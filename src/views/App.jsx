@@ -9,10 +9,16 @@ class App extends React.Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    this.setState({
+      results: this.props.validation.parse(this.props.sourceCode || "")
+    });
+  }
+
   render() {
     return (
       <div className="app">
-        <CodeEditor onChange={this.onEditorChange.bind(this)} />
+        <CodeEditor onChange={this.onEditorChange.bind(this)} value={this.props.sourceCode}/>
         <br/>
         <Validation results={this.state.results} />
         <br/>

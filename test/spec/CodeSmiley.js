@@ -1,7 +1,7 @@
-import Rules from "../../src/Rules";
+import Rules from "../../src/CodeSmiley";
 import { expect } from "chai";
 
-describe("Rules test suite", function () {
+describe("CodeSmiley test suite", function () {
   describe("When creating a Rules", function() {
     var rules, source, result;
 
@@ -9,25 +9,25 @@ describe("Rules test suite", function () {
       rules = new Rules();
     });
 
-    describe("and parsing a simple input", function() {
+    describe("and parsing a simple input with no rules", function() {
       beforeEach(function() {
         source = "var x = 1;";
         result = rules.parse(source);
       });
 
-      it("then an AST is created with type Program", function() {
-        expect(result._ast.type).to.equal("Program");
+      it("then no validation failures are reported", function() {
+        expect(result).to.be.empty;
       });
     });
 
     describe("and adding inclusion rules", function() {
-      var includes, excludes, tree, validation;
-      var act = () => validation = rules.include(includes).exclude(excludes).structure(tree).parse(source).validate();
+      var includes, excludes, structure, validation;
+      var act = () => validation = rules.include(includes).exclude(excludes).structure(structure).parse(source);
 
       beforeEach(function() {
         includes = [];
         excludes = [];
-        tree = {};
+        structure = null;
       });
 
       describe("and inclusion rules are met", function() {
@@ -37,12 +37,12 @@ describe("Rules test suite", function () {
           act();
         });
 
-        it("then there are NO matches for exclusion rules", function() {
-          expect(validation.blacklistResult).to.be.empty;
-        });
-
         it("then there are matches for inclusion rules", function() {
-          expect(validation.whitelistResult).to.not.be.empty;
+          matchArrayItem(validation, {
+            rule: "whitelist",
+            result: true,
+            validation: "variable declaration"
+          });
         });
       });
 
@@ -54,11 +54,11 @@ describe("Rules test suite", function () {
         });
 
         it("then there are matches for exclusion rules", function() {
-          expect(validation.blacklistResult).to.not.be.empty;
-        });
-
-        it("then there are NO matches for inclusion rules", function() {
-          expect(validation.whitelistResult).to.be.empty;
+          matchArrayItem(validation, {
+            rule: "blacklist",
+            result: "variable declaration must not appear in your code",
+            validation: "variable declaration"
+          });
         });
       });
 
@@ -71,11 +71,19 @@ describe("Rules test suite", function () {
         });
 
         it("then there are matches for exclusion rules", function() {
-          expect(validation.blacklistResult).to.not.be.empty;
+          matchArrayItem(validation, {
+            rule: "blacklist",
+            result: "for statement must not appear in your code",
+            validation: "for statement"
+          });
         });
 
         it("then there are matches for inclusion rules", function() {
-          expect(validation.whitelistResult).to.not.be.empty;
+          matchArrayItem(validation, {
+            rule: "whitelist",
+            result: true,
+            validation: "variable declaration"
+          });
         });
       });
 
@@ -87,14 +95,14 @@ describe("Rules test suite", function () {
         });
 
         it("then an exception is thrown", function() {
-          expect(act).to.throw(Error, "variable declaration is already registered");
+          expect(act).to.throw(Error, "blacklist rule: `variable declaration` is already registered");
         });
       });
 
       describe("and matching the shape of a valid structure", function() {
         beforeEach(function() {
           source = "for(var y = 12; y < 0; y++) { if (y === 12) { while(y) {  } } }";
-          tree = {
+          structure = {
             "for statement": {
               "if statement": {
                 "while statement": {
@@ -107,14 +115,18 @@ describe("Rules test suite", function () {
         });
 
         it("then shape is matched", function() {
-          expect(validation.structure).to.equal(true);
+          matchArrayItem(validation, {
+            result: true,
+            rule: "structure",
+            validation: "for statement"
+          });
         });
       });
 
       describe("and matching the shape of a not valid structure", function() {
         beforeEach(function() {
           source = "for(var y = 12; y < 0; y++) { if (y === 12) { while(y) {  } } }";
-          tree = {
+          structure = {
             "for statement": {
               "if statement": {
                 "while statement": {
@@ -128,10 +140,26 @@ describe("Rules test suite", function () {
           act();
         });
 
-        it("then shape is matched", function() {
-          expect(validation.structure).to.not.equal(true);
+        it("then shape is NOT matched", function() {
+          matchArrayItem(validation, {
+            result: "Code structure does not match your specified rules",
+            rule: "structure",
+            validation: "for statement"
+          });
         });
       });
     });
   });
 });
+
+function matchArrayItem(array, item) {
+  var keys = Object.keys(item);
+
+  var result = array.find(entry => {
+    return !keys.some(key => item[key] !== entry[key]);
+  });
+
+  if (!result) {
+    throw new Error("Unable to find criteria in array.\n" + JSON.stringify(item) + "\n" + JSON.stringify(array));
+  }
+}

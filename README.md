@@ -70,7 +70,7 @@ validation.parse("var x = 10;");
 
 # Screenshot
 
-<img src="https://raw.githubusercontent.com/MiguelCastillo/code-smiley/master/images/screenshot.png" width="100%"></img>
+<img src="https://raw.githubusercontent.com/MiguelCastillo/code-smiley/master/images/screenshot.png?token=ABY-JefqYpH9tctRbajv0d452Euy90cpks5XG7cLwA%3D%3D" width="100%"></img>
 
 
 # Token List

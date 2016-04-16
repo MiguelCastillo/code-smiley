@@ -17,10 +17,14 @@ class App extends React.Component {
     );
   }
 
-  onEditorChange(cm, changes) {
-    this.setState({
-      results: this.props.validation.parse(cm.doc.getValue())
-    });
+  onEditorChange(cm /*, changes*/) {
+    try {
+      this.setState({
+        results: this.props.validation.parse(cm.doc.getValue())
+      });
+    }
+    catch(ex) {
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import CodeEditor from "./CodeEditor";
 import Validation from "./Validation";
+import TokenDefinitions from "./TokenDefinitions";
 
 class App extends React.Component {
   constructor() {
@@ -12,7 +13,10 @@ class App extends React.Component {
     return (
       <div className="app">
         <CodeEditor onChange={this.onEditorChange.bind(this)} />
+        <br/>
         <Validation results={this.state.results} />
+        <br/>
+        <TokenDefinitions tokenDefinitions={this.props.tokenDefinitions} />
       </div>
     );
   }

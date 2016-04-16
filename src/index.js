@@ -1,3 +1,4 @@
+import "./arrayFind";
 import DOMReady from "./utils/DOMReady";
 // import { parse } from "acorn";
 

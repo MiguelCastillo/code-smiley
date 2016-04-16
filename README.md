@@ -40,7 +40,7 @@ Method to add a token name as *NOT* allowed (blacklist). Valid inputs are listed
 
 Method to add a token name as allowed (whitelist). Valid inputs are listed in the Token List table below; valid values are in the `name` column.
 
-- **`param`** { string | string[] } tokenName - Name(s) of tokens to flag as not allowed
+- **`param`** { string | string[] } tokenName - Name(s) of tokens to flag as allowed
 
 ### structure(tree)
 

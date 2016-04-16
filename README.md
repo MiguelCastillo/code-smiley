@@ -1,4 +1,4 @@
-# code-smily
+# code-smiley
 Khan Project
 
 # Build

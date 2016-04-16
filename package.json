@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "acorn": "^3.0.4",
+    "codemirror": "^5.13.4",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
   },
@@ -19,6 +20,7 @@
     "chai": "~3.5.0",
     "config-grunt-tasks": "^1.0.0",
     "connect-livereload": "^0.5.4",
+    "eslint-plugin-react": "^4.3.0",
     "eslint-tap": "^1.1.0",
     "grunt": "^1.0.1",
     "grunt-browserify": "~5.0.0",

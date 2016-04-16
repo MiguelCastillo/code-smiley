@@ -1,15 +1,16 @@
 {
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 6
-  },
   "env": {
     "browser": true,
     "es6": true
   },
-  "ecmaFeatures": {
-    "modules": true
+  "extends": ["plugin:react/recommended"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6
   },
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "curly": 2,
     "no-console": 1,
@@ -25,6 +26,7 @@
     "quotes": [1, "double"],
     "key-spacing": 0,
     "no-trailing-spaces": 0,
-    "eol-last": 2
+    "eol-last": 2,
+    "react/prop-types": 0
   }
 }

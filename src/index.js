@@ -1,7 +1,19 @@
-import "./arrayFind";
+import "./utils/arrayFind";
+import React from "react";
+import ReactDOM from "react-dom";
 import DOMReady from "./utils/DOMReady";
-// import { parse } from "acorn";
+import App from "./views/App";
+import Validation from "./CodeSmiley";
+
+var validation = new Validation();
+
+validation
+  .include(["variable declaration", "if statement"])
+  .exclude(["while statement"]);
 
 DOMReady(() => {
-  document.getElementById("app").innerHTML = "We have a place in the dom!";
+ ReactDOM.render(
+   <App validation={validation}/>,
+   document.getElementById("app")
+ );
 });

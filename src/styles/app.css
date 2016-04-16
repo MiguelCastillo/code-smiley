@@ -1,3 +1,51 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .CodeMirror {
-  border: 1px solid #696969;
+  border: 1px solid #acacac;
+}
+
+.list {
+  border: 1px solid #acacac;
+}
+
+.list, .list-header, .list-body, .list-sub {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  width: 100%;
+}
+
+.list .list-header {
+  border-bottom: 1px solid #acacac;
+  font-weight: bold;
+  text-align: left;
+}
+
+.list .list-body {
+  border-bottom: 1px solid #acacac;
+  text-align: left;
+}
+
+.list .list-item {
+  border-bottom: 1px solid #acacac;
+  display: inline-block;
+  padding: 4px;
+}
+
+.token-definitions .token-definition-list {
+  display: none;
+  width: 50%;
+}
+
+.token-definitions.is-expanded .token-definition-list {
+  display: block;
+}
+
+.token-definitions .token-definition-list .list-item {
+  width: 50%;
 }

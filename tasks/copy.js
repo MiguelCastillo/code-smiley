@@ -3,7 +3,9 @@ module.exports = {
     src: [
       "node_modules/spromise/dist/spromise.*",
       "node_modules/bit-imports/dist/bit-imports.*",
-      "src/index.html"
+      "node_modules/codemirror/lib/codemirror.css",
+      "src/**/*.html",
+      "src/**/*.css"
     ],
     dest: "dist/"
   }

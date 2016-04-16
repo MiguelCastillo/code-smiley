@@ -9,7 +9,7 @@ module.exports = {
     }
   },
   site: {
-    files: ['src/**/*.js', '*.js'],
+    files: ['src/**/*.*(js|jsx)', '*.js'],
     tasks: ['build-site'],
     options: {
       livereload: env.siteLivereloadPortNumber

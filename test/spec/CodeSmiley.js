@@ -16,7 +16,7 @@ describe("CodeSmiley test suite", function () {
       });
 
       it("then no validation failures are reported", function() {
-        expect(result).to.be.empty;
+        expect(result.matches).to.be.empty;
       });
     });
 
@@ -38,10 +38,10 @@ describe("CodeSmiley test suite", function () {
         });
 
         it("then there are matches for inclusion rules", function() {
-          matchArrayItem(validation, {
-            rule: "whitelist",
-            result: true,
-            validation: "variable declaration"
+          matchArrayItem(validation.matches, {
+            ruleName: "whitelist",
+            result: "variable declaration was a hit in the whitelist",
+            tokenName: "variable declaration"
           });
         });
       });
@@ -54,10 +54,10 @@ describe("CodeSmiley test suite", function () {
         });
 
         it("then there are matches for exclusion rules", function() {
-          matchArrayItem(validation, {
-            rule: "blacklist",
+          matchArrayItem(validation.matches, {
+            ruleName: "blacklist",
             result: "variable declaration must not appear in your code",
-            validation: "variable declaration"
+            tokenName: "variable declaration"
           });
         });
       });
@@ -71,18 +71,18 @@ describe("CodeSmiley test suite", function () {
         });
 
         it("then there are matches for exclusion rules", function() {
-          matchArrayItem(validation, {
-            rule: "blacklist",
+          matchArrayItem(validation.matches, {
+            ruleName: "blacklist",
             result: "for statement must not appear in your code",
-            validation: "for statement"
+            tokenName: "for statement"
           });
         });
 
         it("then there are matches for inclusion rules", function() {
-          matchArrayItem(validation, {
-            rule: "whitelist",
-            result: true,
-            validation: "variable declaration"
+          matchArrayItem(validation.matches, {
+            ruleName: "whitelist",
+            result: "variable declaration was a hit in the whitelist",
+            tokenName: "variable declaration"
           });
         });
       });
@@ -115,10 +115,10 @@ describe("CodeSmiley test suite", function () {
         });
 
         it("then shape is matched", function() {
-          matchArrayItem(validation, {
+          matchArrayItem(validation.matches, {
             result: true,
-            rule: "structure",
-            validation: "for statement"
+            ruleName: "structure",
+            tokenName: "for statement"
           });
         });
       });
@@ -141,10 +141,10 @@ describe("CodeSmiley test suite", function () {
         });
 
         it("then shape is NOT matched", function() {
-          matchArrayItem(validation, {
+          matchArrayItem(validation.matches, {
             result: "Code structure does not match your specified rules",
-            rule: "structure",
-            validation: "for statement"
+            ruleName: "structure",
+            tokenName: "for statement"
           });
         });
       });

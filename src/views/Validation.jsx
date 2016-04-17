@@ -2,15 +2,20 @@ import React from "react";
 
 class ValidationLocation extends React.Component {
   render() {
+    if (!this.props.location) {
+      return null;
+    }
+
     return (
-      <span className="validation-location">{this.props.location.line + ":" + (this.props.location.column + 1)}</span>
+      <span className="validation-location">[{this.props.location.line + ":" + (this.props.location.column + 1)}]</span>
     );
   }
 }
 
 class ValidationItem extends React.Component {
   render() {
-    var { rule, validation, result, node } = this.props.item;
+    var { ruleName, tokenName, result, node } = this.props.item;
+    var location = node && node.loc.start;
     var className = ["validation-item"];
 
     if (result !== true) {
@@ -19,7 +24,7 @@ class ValidationItem extends React.Component {
 
     return (
       <li className={className} >
-        {rule}: [{validation}] [<ValidationLocation location={node.loc.start}/>] {result}
+        {ruleName}: [{tokenName}] {<ValidationLocation location={location}/>} {result}
       </li>
     );
   }

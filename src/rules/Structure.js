@@ -21,7 +21,7 @@ function traverse(parent, tree = {}) {
   var resultAggregator = ResultAggregatorFactory.create();
 
   var visitors = Object.keys(tree).reduce((container, item) => {
-    container[toTokenName(item)] = resultAggregator.createVisitor(null, item);
+    container[toTokenName(item)] = resultAggregator.createVisitor(item);
     return container;
   }, {});
 
@@ -35,7 +35,7 @@ function traverse(parent, tree = {}) {
     return false;
   }
 
-  return results.some((result) => traverse(result.node.body || result.node.consequent, tree[result.validation]));
+  return results.some((result) => traverse(result.node.body || result.node.consequent, tree[result.tokenName]));
 }
 
 export default Structure;

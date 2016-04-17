@@ -45,16 +45,20 @@ class CodeSmiley {
 function getFailures(codeSmiley, results) {
   var matches = results
     .reduce((container, item) => {
-      if (item.ruleName === "whitelist") {
+      if (item.result !== true) {
+        container.others.push(item);
+      }
+      else if (item.ruleName === "whitelist") {
         container.whitelist[item.tokenName] = item;
       }
-      else if (item.result !== true) {
-        container.others.push(item);
+      else if (item.ruleName === "structure") {
+        container.structure[item.tokenName] = item;
       }
 
       return container;
     }, {
       whitelist: {},
+      structure: {},
       others: []
     });
 
@@ -66,7 +70,17 @@ function getFailures(codeSmiley, results) {
     return container;
   }, []);
 
-  return whitelistMisses.concat(matches.others);
+  var structureMisses = codeSmiley._structure.items.reduce((container, item) => {
+    var tokenName = Object.keys(item)[0];
+
+    if (!matches.structure[tokenName]) {
+      container.push(new ValidationResult("structure", "rule not found in your code").withTokenName(tokenName));
+    }
+
+    return container;
+  }, []);
+
+  return matches.others.concat(whitelistMisses).concat(structureMisses);
 }
 
 export default CodeSmiley;

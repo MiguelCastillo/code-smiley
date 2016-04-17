@@ -27,7 +27,7 @@ describe("CodeSmiley test suite", function () {
       beforeEach(function() {
         includes = [];
         excludes = [];
-        structure = null;
+        structure = {};
       });
 
       describe("and inclusion rules are met", function() {

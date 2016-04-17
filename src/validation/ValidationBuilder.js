@@ -1,4 +1,4 @@
-import toTokenName from "../utils/toTokenName";
+import toTokenCode from "../utils/toTokenCode";
 import Rule from "./Rule";
 
 class ValidationBuilder {
@@ -20,7 +20,7 @@ class ValidationBuilder {
         }
       }
 
-      var reelTokenNamez = toTokenName(tokenName);
+      var tokenCode = toTokenCode(tokenName);
 
       //
       // TODO:
@@ -28,15 +28,15 @@ class ValidationBuilder {
       // another rule, we don't detect throw an error.  We just gotta
       // make sure that we check the list of items as well.
       //
-      if (rule.loneWolf() && container[reelTokenNamez]) {
+      if (rule.loneWolf() && container[tokenCode]) {
         throw new Error(rule.name + " rule: `" + tokenName + "` is already registered");
       }
 
-      if (!container[reelTokenNamez]) {
-        container[reelTokenNamez] = [];
+      if (!container[tokenCode]) {
+        container[tokenCode] = [];
       }
 
-      container[reelTokenNamez].push(resultAggregator.createVisitor(tokenName, rule));
+      container[tokenCode].push(resultAggregator.createVisitor(tokenName, rule));
       return container;
     }, this._handlers);
 

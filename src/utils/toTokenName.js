@@ -1,13 +1,7 @@
-function toTokenName(input) {
-  return input
-    .replace(/\s+/, " ")
-    .split(" ")
-    .map(capitalize)
-    .join("");
-}
-
-function capitalize(input) {
-  return input.replace(/^\w/, input[0].toUpperCase());
+function toTokenName(token) {
+  return token
+    .replace(/([A-Z]+)/g, (i) => " " + i.toLowerCase())
+    .trim();
 }
 
 export default toTokenName;

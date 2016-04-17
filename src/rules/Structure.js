@@ -1,5 +1,5 @@
 import { simple } from "acorn/dist/walk";
-import toTokenName from "../utils/toTokenName";
+import toTokenCode from "../utils/toTokenCode";
 import Rule from "../validation/Rule";
 import ResultAggregatorFactory from "../validation/ResultAggregatorFactory";
 
@@ -21,7 +21,7 @@ function traverse(parent, tree = {}) {
   var resultAggregator = ResultAggregatorFactory.create();
 
   var visitors = Object.keys(tree).reduce((container, item) => {
-    container[toTokenName(item)] = resultAggregator.createVisitor(item);
+    container[toTokenCode(item)] = resultAggregator.createVisitor(item);
     return container;
   }, {});
 

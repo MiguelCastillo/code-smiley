@@ -1,11 +1,11 @@
 import { base } from "acorn/dist/walk";
-import toTokenFriendlyName from "../utils/toTokenFriendlyName";
+import toTokenName from "../utils/toTokenName";
 
-var TokenDefinitions = Object.keys(base).reduce((container, code) => {
-  var name = toTokenFriendlyName(code);
+var tokenDefinitions = Object.keys(base).reduce((container, code) => {
+  var name = toTokenName(code);
   container[code] = { name, code };
   return container;
 }, {});
 
-export default TokenDefinitions;
+export default tokenDefinitions;
 

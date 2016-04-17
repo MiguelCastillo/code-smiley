@@ -40,7 +40,7 @@ describe("CodeSmiley test suite", function () {
         it("then there are matches for inclusion rules", function() {
           matchArrayItem(validation.matches, {
             ruleName: "whitelist",
-            result: "variable declaration was a hit in the whitelist",
+            result: true,
             tokenName: "variable declaration"
           });
         });
@@ -81,7 +81,7 @@ describe("CodeSmiley test suite", function () {
         it("then there are matches for inclusion rules", function() {
           matchArrayItem(validation.matches, {
             ruleName: "whitelist",
-            result: "variable declaration was a hit in the whitelist",
+            result: true,
             tokenName: "variable declaration"
           });
         });

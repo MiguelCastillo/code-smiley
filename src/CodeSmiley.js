@@ -48,10 +48,7 @@ function getFailures(codeSmiley, results) {
       if (item.ruleName === "whitelist") {
         container.whitelist[item.tokenName] = item;
       }
-      else if (item.ruleName === "structure" && item.result === true) {
-        container.structure[item.tokenName] = item;
-      }
-      else {
+      else if (item.result !== true) {
         container.others.push(item);
       }
 

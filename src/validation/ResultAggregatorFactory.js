@@ -1,12 +1,19 @@
+import ValidationResult from "./ValidationResult";
+
 class ResultAggregatorFactory {
   static create() {
     var results = [];
 
-    function createVisitor(rule, validation) {
+    function createVisitor(tokenName, rule = null) {
       return function visitor(node) {
-        var result = rule ? rule.validate(validation, node) : false;
-        var name = rule && rule.name;
-        results.push({node, validation, result, rule: name});
+        var result = rule ? rule.validate(tokenName, node) : false;
+        var ruleName = rule && rule.name;
+
+        var validationResult = new ValidationResult(ruleName, result)
+          .withNode(node)
+          .withTokenName(tokenName);
+
+        results.push(validationResult);
       };
     }
 

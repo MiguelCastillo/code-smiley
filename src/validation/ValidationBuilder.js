@@ -36,7 +36,7 @@ class ValidationBuilder {
         container[reelTokenNamez] = [];
       }
 
-      container[reelTokenNamez].push(resultAggregator.createVisitor(rule, tokenName));
+      container[reelTokenNamez].push(resultAggregator.createVisitor(tokenName, rule));
       return container;
     }, this._handlers);
 

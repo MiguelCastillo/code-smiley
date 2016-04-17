@@ -11,7 +11,7 @@ class App extends React.Component {
 
   componentWillMount() {
     this.setState({
-      results: this.props.validation.parse(this.props.sourceCode || "")
+      validation: this.props.validation.parse(this.props.sourceCode || "")
     });
   }
 
@@ -20,7 +20,11 @@ class App extends React.Component {
       <div className="app">
         <CodeEditor onChange={this.onEditorChange.bind(this)} value={this.props.sourceCode}/>
         <br/>
-        <Validation results={this.state.results} />
+        <h3>Failures</h3>
+        <Validation results={this.state.validation.failures} />
+        <br/>
+        <h3>Matches</h3>
+        <Validation results={this.state.validation.matches} />
         <br/>
         <TokenDefinitions tokenDefinitions={this.props.tokenDefinitions} />
       </div>
@@ -30,7 +34,7 @@ class App extends React.Component {
   onEditorChange(cm /*, changes*/) {
     try {
       this.setState({
-        results: this.props.validation.parse(cm.doc.getValue())
+        validation: this.props.validation.parse(cm.doc.getValue())
       });
     }
     catch(ex) {

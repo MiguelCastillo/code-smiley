@@ -55,7 +55,6 @@ function getFailures(codeSmiley, results) {
       return container;
     }, {
       whitelist: {},
-      structure: {},
       others: []
     });
 

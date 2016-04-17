@@ -1,3 +1,3 @@
 import "./spec/CodeSmiley";
 import "./spec/utils/toTokenName";
-import "./spec/utils/toTokenFriendlyName";
+import "./spec/utils/toTokenCode";

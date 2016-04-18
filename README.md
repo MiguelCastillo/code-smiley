@@ -1,6 +1,18 @@
 # code-smiley
 Khan Project
 
+# Instructions
+
+To load the project and see it run you can just run `$ npm install && grunt serve-site`.  That should load things up.
+
+To walk the code, you can start with [index.js](https://github.com/MiguelCastillo/code-smiley/blob/master/src/index.js). That's the main app entry. That's where we setup the whitelist, blacklist, and structure rules in the sample application.
+
+The whitelist, blacklist, and structure rules are managed by the module [CodeSmiley.js](https://github.com/MiguelCastillo/code-smiley/blob/master/src/CodeSmiley.js), which configures the underlying validation engine, collects results, and transforms them so that we display the information in a somewhat consumable format to the user.
+
+The underlying validation engine is encapsulated in [Validation.js](https://github.com/MiguelCastillo/code-smiley/blob/master/src/validation/Validation.js), which is where we make calls into acorn to parse the input code and accumulate results from all the different configured validation rules.
+
+The validation rules used in this sample project are defined in [rules](https://github.com/MiguelCastillo/code-smiley/tree/master/src/rules).
+
 # Build
 
 ## Install
@@ -70,7 +82,7 @@ validation.parse("var x = 10;");
 
 # Screenshot
 
-<img src="https://raw.githubusercontent.com/MiguelCastillo/code-smiley/master/images/screenshot.png?token=ABY-JefqYpH9tctRbajv0d452Euy90cpks5XG7cLwA%3D%3D" width="100%"></img>
+<img src="https://raw.githubusercontent.com/MiguelCastillo/code-smiley/master/images/screenshot.png?token=ABY-JefqYpH9tctRbajv0d452Euy90cpks5XG7cLwA%3D%3D" width="50%"></img>
 
 
 # Token List

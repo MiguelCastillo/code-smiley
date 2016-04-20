@@ -23,8 +23,10 @@ var sourceCode = `var x = 10;
 for(var i = 0; i < 81; i++) {
   var s = 2;
 
-  if (i) {
-    console.log(i);
+  function tt() {
+    if (i) {
+      console.log(i);
+    }
   }
 }
 

@@ -1,5 +1,7 @@
 # code-smiley
-JavaScript validation rules
+JavaScript validation rules.
+
+Define whitelist, blacklist, and structure rules that are matched against input source code. Whatever validation rules that are not met are reported as failures.
 
 # Instructions
 

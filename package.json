@@ -41,7 +41,7 @@
   "directories": {
     "test": "test"
   },
-  "description": "Khan Project",
+  "description": "JavaScript validation rules",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MiguelCastillo/code-smiley.git"

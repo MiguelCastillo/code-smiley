@@ -1,5 +1,5 @@
 # code-smiley
-Khan Project
+JavaScript validation rules
 
 # Instructions
 

@@ -2,7 +2,7 @@ import { recursive } from "acorn/dist/walk";
 import toTokenCode from "../utils/toTokenCode";
 import isObjectEmpty from "../utils/isObjectEmpty";
 import Rule from "../validation/Rule";
-import ResultAggregatorFactory from "../validation/ResultAggregatorFactory";
+import ValidationResult from "../validation/ValidationResult";
 
 class Structure extends Rule {
   constructor() {
@@ -19,14 +19,16 @@ function traverse(tokenTree, astNode) {
     return true;
   }
 
-  var resultAggregator = ResultAggregatorFactory.create();
-  var visitors = buildVisitorMap(tokenTree, resultAggregator);
+  var resultAccumulator = new ValidationResult.Accumulator();
+  var visitors = buildVisitorMap(tokenTree, resultAccumulator);
 
   if (!isObjectEmpty(visitors)) {
     recursive(astNode, null, visitors);
   }
 
-  return resultAggregator.results.some((result) => traverse(tokenTree[result.tokenName], result.node.body || result.node.consequent));
+  return resultAccumulator
+    .results
+    .some((result) => traverse(tokenTree[result.tokenName], result.node.body || result.node.consequent));
 }
 
 function buildVisitorMap(tokenTree, resultAggregator) {
